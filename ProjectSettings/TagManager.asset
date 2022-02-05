@@ -11,13 +11,13 @@ TagManager:
   - 
   - Water
   - UI
-  - Manager
-  - TouchController
+  - 
+  - 
   - SafePlatform
   - UnsafePlatform
   - Ball
-  - 
-  - 
+  - Manager
+  - Cylinder
   - 
   - 
   - 

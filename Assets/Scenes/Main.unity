@@ -379,7 +379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 8192
   m_MaxRayIntersections: 0
 --- !u!1 &990540963
 GameObject:
@@ -1230,7 +1230,7 @@ GameObject:
   - component: {fileID: 1659254785}
   - component: {fileID: 1659254784}
   - component: {fileID: 1659254787}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: TouchController
   m_TagString: Untagged
   m_Icon: {fileID: 0}

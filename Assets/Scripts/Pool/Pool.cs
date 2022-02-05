@@ -21,13 +21,9 @@ namespace Pool
             objectSpawnedTransform.position = position;
             objectSpawnedTransform.rotation = rotation;
 
+            itemPoolQueue.Enqueue(objectSpawned);
+            
             return objectSpawnedTransform;
-        }
-        
-        public void AddItemBackToThePool(GameObject itemGameObject)
-        {
-            itemGameObject.SetActive(false);
-            itemPoolQueue.Enqueue(itemGameObject);
         }
         
         private void InitializeItemPoolDict()

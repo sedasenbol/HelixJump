@@ -13,13 +13,13 @@ TagManager:
   - UI
   - 
   - 
-  - SafePlatform
-  - UnsafePlatform
-  - Ball
-  - Manager
+  - Platform/SafePlatform
+  - Platform/UnsafePlatform
+  - Platform/PlatformGroup
+  - Manager&Container&Pool
   - Cylinder
-  - 
-  - 
+  - TouchController
+  - Ball
   - 
   - 
   - 

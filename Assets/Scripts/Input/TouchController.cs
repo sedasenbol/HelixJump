@@ -1,27 +1,50 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Input
 {
-    public class TouchController : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerExitHandler
+    public class TouchController : MonoBehaviour, IBeginDragHandler, IDragHandler
     {
-        public static event Action OnPlayerTapped;
-        public static event Action OnPlayerDragged;
-        
-        public void OnPointerClick(PointerEventData eventData)
+        public static event Action<Vector3> OnPlayerDragged;
+
+        private UnityEngine.Camera mainCam;
+        private Vector3 lastDragWorldPosition;
+
+        public void OnBeginDrag(PointerEventData eventData)
         {
-            OnPlayerTapped?.Invoke();
+            lastDragWorldPosition = ConvertScreenToWorldPosition(eventData);
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        public void OnDrag(PointerEventData eventData)
         {
+            var currentDragWorldPosition = ConvertScreenToWorldPosition(eventData);
             
+            OnPlayerDragged?.Invoke(currentDragWorldPosition - lastDragWorldPosition);
+
+            lastDragWorldPosition = currentDragWorldPosition;
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        private Vector3 ConvertScreenToWorldPosition(PointerEventData eventData)
         {
+            var screenPos = new Vector3(eventData.position.x, eventData.position.y, mainCam.nearClipPlane);
+
+            return mainCam.ScreenToWorldPoint(screenPos);
+        }
+
+        private void OnEnable()
+        {
+            mainCam = UnityEngine.Camera.main;
             
+            if (mainCam != null) {return;}
+            
+            Debug.LogError("Tag the main camera.");
+        }
+
+        private void OnDisable()
+        {
+            mainCam = null;
         }
     }
 }

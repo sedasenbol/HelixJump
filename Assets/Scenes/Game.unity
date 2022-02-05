@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311915, g: 0.3807396, b: 0.35872662, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -138,7 +138,12 @@ PrefabInstance:
     - target: {fileID: 455029982766931205, guid: 0c7378316c02148e998abd8d5edd2467,
         type: 3}
       propertyPath: m_Name
-      value: FirstPlatform
+      value: FirstPlatformGroup
+      objectReference: {fileID: 0}
+    - target: {fileID: 455029982766931205, guid: 0c7378316c02148e998abd8d5edd2467,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2879624735922808772, guid: 0c7378316c02148e998abd8d5edd2467,
         type: 3}
@@ -209,6 +214,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
+    - target: {fileID: 374278152844838401, guid: a6e4c37c59e654b5190a4b7f9146c0ea,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 374278152844838414, guid: a6e4c37c59e654b5190a4b7f9146c0ea,
         type: 3}
       propertyPath: m_RootOrder
@@ -277,6 +287,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SplashContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1534957623158410444, guid: 5be66c47cae60472287ddaab6d84321b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1534957623158410447, guid: 5be66c47cae60472287ddaab6d84321b,
         type: 3}
@@ -421,7 +436,7 @@ PrefabInstance:
     - target: {fileID: 6140444779434829082, guid: 3680d5349133e4ef88e8f7f0fbd5f0ba,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7321647142923885386, guid: 3680d5349133e4ef88e8f7f0fbd5f0ba,
         type: 3}
@@ -676,6 +691,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlatformContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 3504112895374866735, guid: 18cad5ea044cc49afb142d597a1f2d4d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18cad5ea044cc49afb142d597a1f2d4d, type: 3}
 --- !u!4 &3504112895784568935 stripped
@@ -695,6 +715,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SplashPool
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091027223259232728, guid: 578eda4ccd92d4f51ada67205769953c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9091027223259232729, guid: 578eda4ccd92d4f51ada67205769953c,
         type: 3}

@@ -16,11 +16,11 @@ TagManager:
   - Platform/SafePlatform
   - Platform/UnsafePlatform
   - Platform/PlatformGroup
-  - Manager&Container&Pool
+  - Manager&Spawner&Container&Pool
   - Cylinder
   - TouchController
   - Ball
-  - 
+  - Platform/LastPlatform
   - 
   - 
   - 

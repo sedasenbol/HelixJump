@@ -6,84 +6,96 @@ using UnityEngine.SceneManagement;
 
 namespace GameCore
 {
-public class GameManager : Singleton<GameManager>
-{
-    public static event Action OnNextLevelTriggered;
-    
-    private readonly GameState gameState = new GameState();
-
-    private void Start()
+    public class GameManager : Singleton<GameManager>
     {
-        LoadGameScene();
-    }
+        private readonly GameInfo gameInfo = new GameInfo();
 
-    private void LoadGameScene()
-    {
-        SceneManager.LoadScene((int) GameState.Scene.Game, LoadSceneMode.Additive);
+        private void Start()
+        {
+            gameInfo.CurrentScene = GameInfo.Scene.MainMenu;
+            gameInfo.CurrentState = GameInfo.State.Start;
+            
+            LoadGameScene();
+        }
+
+        private void LoadGameScene()
+        {
+            SceneManager.LoadScene((int) GameInfo.Scene.Game, LoadSceneMode.Additive);
+        }
+
+        private void OnLevelFailed()
+        {
+            Time.timeScale = 0f;
+            gameInfo.CurrentState = GameInfo.State.Over;
+            UIManager.Instance.ShowFailScreen();
+        }
+
+        private void OnLevelCompleted()
+        {
+            gameInfo.CurrentState = GameInfo.State.Success;
+            
+            UIManager.Instance.ShowSuccessScreen();
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        {
+            if (scene == SceneManager.GetSceneByBuildIndex(0)) {return;}
+
+            SceneManager.SetActiveScene(scene);
+            
+            gameInfo.CurrentScene = GameInfo.Scene.Game;
+            gameInfo.CurrentState = GameInfo.State.Play;
+            
+            LevelManager.Instance.HandleNewLevel();
+        }
         
-        gameState.CurrentScene = GameState.Scene.Game;
-        gameState.CurrentState = GameState.State.Play;
-    }
+        private void PauseGame()
+        {
+            Time.timeScale = 0f;
+            
+            gameInfo.CurrentState = GameInfo.State.Paused;
+        }
 
-    public void HandleFailedLevel()
-    {
-        Time.timeScale = 0f;
-        gameState.CurrentState = GameState.State.Over;
-        UIManager.Instance.ShowFailScreen();
-    }
-
-    public void HandleCompletedLevel()
-    {
-        OnNextLevelTriggered?.Invoke();
-    }
-
-    private void TriggerNextLevel()
-    {
-        //DOTween.KillAll();
+        private void ResumeGame()
+        {
+            Time.timeScale = 1f;
+            
+            gameInfo.CurrentState = GameInfo.State.Play;
+        }
         
-        //mainCamTransform.position = cameraFollow.StartPosition;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
-    {
-        if (scene == SceneManager.GetSceneByBuildIndex(0)) {return;}
-
-        SceneManager.SetActiveScene(scene);
-        OnNextLevelTriggered?.Invoke();
-    }
-    
-    private void PauseGame()
-    {
-        Time.timeScale = 0f;
-        gameState.CurrentState = GameState.State.Paused;
-    }
-
-    private void ResumeGame()
-    {
-        Time.timeScale = 1f;
-        gameState.CurrentState = GameState.State.Play;
-    }
-    
-    private void OnEnable()
-    {
-        UIManager.OnPauseButtonClicked += PauseGame;
-        UIManager.OnResumeButtonClicked += ResumeGame;
-
-        //LevelManager.OnLevelCompleted += OnLevelCompleted;
-        //LevelManager.OnLevelFailed += OnLevelFailed;
+        private void OnTapToContinueButtonClicked()
+        {
+            SceneManager.UnloadSceneAsync((int)gameInfo.CurrentScene);
+            
+            gameInfo.CurrentLevelIndex++;
+            
+            LoadGameScene();
+        }
         
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-    
-    private void OnDisable()
-    {
-        UIManager.OnPauseButtonClicked -= PauseGame;
-        UIManager.OnResumeButtonClicked -= ResumeGame;
+        private void OnEnable()
+        {
+            UIManager.OnPauseButtonClicked += PauseGame;
+            UIManager.OnResumeButtonClicked += ResumeGame;
+            UIManager.OnTapToContinueButtonClicked += OnTapToContinueButtonClicked;
+
+            LevelManager.OnLevelFailed += OnLevelFailed;
+            LevelManager.OnLevelCompleted += OnLevelCompleted;
+            
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
         
-        //LevelManager.OnLevelCompleted -= OnLevelCompleted;
-        //LevelManager.OnLevelFailed -= OnLevelFailed;
-        
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        private void OnDisable()
+        {
+            UIManager.OnPauseButtonClicked -= PauseGame;
+            UIManager.OnResumeButtonClicked -= ResumeGame;
+            UIManager.OnTapToContinueButtonClicked -= OnTapToContinueButtonClicked;
+            
+            LevelManager.OnLevelFailed -= OnLevelFailed;
+            LevelManager.OnLevelCompleted -= OnLevelCompleted;
+            
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        public GameInfo GameInformation => gameInfo;
     }
-}
 }

@@ -17,7 +17,7 @@ namespace UI
         
         private void OnEnable()
         {
-            pauseButton.SetActive(false);
+            pauseButton.SetActive(true);
             resumeButton.SetActive(false);
             tapToRestartUI.SetActive(false);
             tapToContinueUI.SetActive(false);
@@ -28,6 +28,12 @@ namespace UI
             pauseButton.SetActive(false);
             resumeButton.SetActive(false);
             tapToRestartUI.SetActive(true);
+        }
+
+        public void ShowSuccessScreen()
+        {
+            pauseButton.SetActive(false);
+            tapToContinueUI.SetActive(true);
         }
 
         public void HandlePauseButtonClick()
@@ -49,6 +55,7 @@ namespace UI
         public void HandleTapToContinueClick()
         {
             tapToContinueUI.SetActive(false);
+            pauseButton.SetActive(true);
             
             OnTapToContinueButtonClicked?.Invoke();
         }

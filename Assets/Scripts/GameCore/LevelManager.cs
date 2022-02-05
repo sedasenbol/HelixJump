@@ -1,20 +1,30 @@
 using System;
-using Input;
-using UnityEngine;
-using UnityEngine.EventSystems;
+
 
 namespace GameCore
 {
     public class LevelManager : Singleton<LevelManager>
     {
-        public void HandleFailedLevel()
+        public static event Action OnNewLevelLoaded;
+        public static event Action OnLevelFailed;
+        public static event Action OnLevelCompleted; 
+        
+        // Called by GameManager.cs when "Game" scene is loaded. 
+        public void HandleNewLevel()
         {
-            GameManager.Instance.HandleFailedLevel();
+            OnNewLevelLoaded?.Invoke();
         }
 
+        // Called by Ball.cs when the ball hits an unsafe platform.
+        public void HandleFailedLevel()
+        {
+            OnLevelFailed?.Invoke();
+        }
+
+        // Called by Ball.cs when the ball hits the last platform.
         public void HandleCompletedLevel()
         {
-            GameManager.Instance.HandleCompletedLevel();
+            OnLevelCompleted?.Invoke();
         }
     }
 }

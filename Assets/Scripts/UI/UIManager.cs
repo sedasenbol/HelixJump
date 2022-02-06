@@ -63,6 +63,7 @@ namespace UI
         public void HandleTapToRestartClick()
         {
             tapToRestartUI.SetActive(false);
+            pauseButton.SetActive(true);
             
             OnTapToRestartButtonClicked?.Invoke();
         }

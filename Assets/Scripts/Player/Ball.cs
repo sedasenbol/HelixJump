@@ -22,13 +22,27 @@ namespace Player
         private Transform myTransform;
         private Vector3 splashSpawnRelativePos;
 
+        private bool isActive;
+
+        private void FixedUpdate()
+        {
+            if (rb.velocity.sqrMagnitude < Mathf.Pow(ballBounceSettings.MaxVelocityMagnitude,2)) {return;}
+            
+            rb.AddForce(-Physics.gravity,ForceMode.Force);            
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
+            if (!isActive) {return;}
+            
             var otherLayer = collision.gameObject.layer;
             
             if (otherLayer == unsafePlatformLayer)
             {
                 LevelManager.Instance.HandleFailedLevel();
+
+                isActive = false;
+                rb.Sleep();
             }
             else if (otherLayer == safePlatformLayer)
             {
@@ -44,6 +58,8 @@ namespace Player
             else if (otherLayer == lastPlatformLayer)
             {
                 LevelManager.Instance.HandleCompletedLevel();
+
+                isActive = false;
             }
         }
 
@@ -67,6 +83,8 @@ namespace Player
             safePlatformLayer = LayerMask.NameToLayer("Platform/SafePlatform");
             unsafePlatformLayer = LayerMask.NameToLayer("Platform/UnsafePlatform");
             lastPlatformLayer = LayerMask.NameToLayer("Platform/LastPlatform");
+
+            isActive = true;
         }
 
         private void OnDisable()

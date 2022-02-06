@@ -25,8 +25,8 @@ namespace GameCore
 
         private void OnLevelFailed()
         {
-            Time.timeScale = 0f;
             gameInfo.CurrentState = GameInfo.State.Over;
+            
             UIManager.Instance.ShowFailScreen();
         }
 
@@ -71,13 +71,21 @@ namespace GameCore
             
             LoadGameScene();
         }
+
+        private void OnTapToRestartButtonClicked()
+        {
+            SceneManager.UnloadSceneAsync((int)gameInfo.CurrentScene);
+            
+            LoadGameScene();
+        }
         
         private void OnEnable()
         {
             UIManager.OnPauseButtonClicked += PauseGame;
             UIManager.OnResumeButtonClicked += ResumeGame;
             UIManager.OnTapToContinueButtonClicked += OnTapToContinueButtonClicked;
-
+            UIManager.OnTapToRestartButtonClicked += OnTapToRestartButtonClicked;
+            
             LevelManager.OnLevelFailed += OnLevelFailed;
             LevelManager.OnLevelCompleted += OnLevelCompleted;
             
@@ -89,6 +97,7 @@ namespace GameCore
             UIManager.OnPauseButtonClicked -= PauseGame;
             UIManager.OnResumeButtonClicked -= ResumeGame;
             UIManager.OnTapToContinueButtonClicked -= OnTapToContinueButtonClicked;
+            UIManager.OnTapToRestartButtonClicked -= OnTapToRestartButtonClicked;
             
             LevelManager.OnLevelFailed -= OnLevelFailed;
             LevelManager.OnLevelCompleted -= OnLevelCompleted;

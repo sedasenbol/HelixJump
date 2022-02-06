@@ -29,9 +29,11 @@ namespace Camera
             offset = myTransform.position - ballTransform.position;
         }
 
-        private void OnLevelEnd()
+        private void OnLevelEnded()
         {
             shouldFollowPlayer = false;
+
+            ballTransform = null;
         }
 
         private void LateUpdate()
@@ -41,9 +43,9 @@ namespace Camera
             var targetPosition = ballTransform.position + offset;
             var myPosition = myTransform.position;
             
-            if (targetPosition.y > myPosition.y) {return;}
+            if (targetPosition.y + cameraSettings.CameraMovementThreshold > myPosition.y) {return;}
 
-            myTransform.position = targetPosition;
+            myTransform.position = Vector3.Lerp(myPosition, targetPosition, cameraSettings.CameraLerpRatio);
         }
 
         private void OnEnable()
@@ -51,8 +53,8 @@ namespace Camera
             myTransform = transform;
             
             LevelManager.OnNewLevelLoaded += OnNewLevelLoaded;
-            LevelManager.OnLevelFailed += OnLevelEnd;
-            LevelManager.OnLevelCompleted += OnLevelEnd;
+            LevelManager.OnLevelFailed += OnLevelEnded;
+            LevelManager.OnLevelCompleted += OnLevelEnded;
 
             Ball.OnBallsFirstHit += OnBallsFirstHit;
         }
@@ -62,8 +64,8 @@ namespace Camera
             myTransform = null;
             
             LevelManager.OnNewLevelLoaded -= OnNewLevelLoaded;
-            LevelManager.OnLevelFailed -= OnLevelEnd;
-            LevelManager.OnLevelCompleted -= OnLevelEnd;
+            LevelManager.OnLevelFailed -= OnLevelEnded;
+            LevelManager.OnLevelCompleted -= OnLevelEnded;
             
             Ball.OnBallsFirstHit -= OnBallsFirstHit;
         }

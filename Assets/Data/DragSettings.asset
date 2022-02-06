@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e73e72f9a44d4306b2d4f094d1d7d9a3, type: 3}
   m_Name: DragSettings
   m_EditorClassIdentifier: 
-  dragToAngleFactor: 3000
+  dragToAngleFactor: 1500

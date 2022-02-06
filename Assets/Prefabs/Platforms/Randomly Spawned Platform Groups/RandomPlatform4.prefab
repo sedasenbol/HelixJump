@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7187300553616900795}
   - component: {fileID: 1070939944735632386}
+  - component: {fileID: -3125629220301403096}
   m_Layer: 0
   m_Name: RandomPlatform4
   m_TagString: Untagged
@@ -68,6 +69,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragSettings: {fileID: 11400000, guid: 8e39a5edc56ba4bc9a0c6efb22a3e02c, type: 2}
+--- !u!114 &-3125629220301403096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4762706059862161530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267397826373a4ba0b9f31e5851913e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &283294554232411093
 PrefabInstance:
   m_ObjectHideFlags: 0

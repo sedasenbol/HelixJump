@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: CameraSettings
   m_EditorClassIdentifier: 
   cameraStartPosition: {x: 0, y: 5, z: -10}
+  cameraMovementThreshold: 0.3
+  cameraLerpRatio: 0.8

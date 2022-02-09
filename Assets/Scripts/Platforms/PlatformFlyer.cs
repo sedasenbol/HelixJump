@@ -17,20 +17,17 @@ namespace Platforms
         public void FlyAway()
         {
             myTransform.GetComponentInChildren<Collider>().enabled = false;
-            
-            myTransform.DOMove(myTransform.position - myTransform.right * platformBreakSettings.PlatformFlyingDistance,
-                platformBreakSettings.PlatformFlyingDuration);
 
-            StartCoroutine(SetInactiveWithDelay());
+            myTransform.DOMove(myTransform.position - myTransform.right * platformBreakSettings.PlatformFlyingXDistance -
+                myTransform.up * platformBreakSettings.PlatformFlyingYDistance, platformBreakSettings.PlatformFlyingDuration).OnComplete(
+                () =>
+                {
+                    gameObject.SetActive(false);
+                });
+
+            myTransform.DOScale(Vector3.zero, platformBreakSettings.PlatformFlyingDuration);
         }
 
-        private IEnumerator SetInactiveWithDelay()
-        {
-            yield return new WaitForSeconds(platformBreakSettings.PlatformFlyingDuration);
-            
-            gameObject.SetActive(false);
-        }
-        
         private void OnEnable()
         {
             myTransform = transform;

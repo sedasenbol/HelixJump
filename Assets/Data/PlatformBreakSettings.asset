@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66519355e01f4b50b7c5689e2d773d68, type: 3}
   m_Name: PlatformBreakSettings
   m_EditorClassIdentifier: 
-  platformFlyingDistance: 30
-  platformFlyingDuration: 10
+  platformFlyingXDistance: 4
+  platformFlyingYDistance: 6
+  platformFlyingDuration: 1.5

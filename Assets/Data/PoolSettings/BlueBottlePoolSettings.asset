@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: BlueBottlePoolSettings
   m_EditorClassIdentifier: 
   poolSize: 10
-  itemTransform: {fileID: 4000011650569256, guid: 2cf6690298568294cb6b655c0a3aeb87,
-    type: 3}
+  itemPrefab: {fileID: 4000011650569256, guid: 2cf6690298568294cb6b655c0a3aeb87, type: 3}

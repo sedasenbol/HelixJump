@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: SplashPoolSettings
   m_EditorClassIdentifier: 
   poolSize: 10
-  itemTransform: {fileID: 8385901116453798367, guid: ec21e3659a1f34552979396bd48cce60,
-    type: 3}
-  itemContainerTransform: {fileID: 1534957623158410447, guid: 5be66c47cae60472287ddaab6d84321b,
+  itemPrefab: {fileID: 8385901116453798367, guid: ec21e3659a1f34552979396bd48cce60,
     type: 3}

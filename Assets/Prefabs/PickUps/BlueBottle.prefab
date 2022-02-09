@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33000011564412998}
   - component: {fileID: 23000010119388918}
   - component: {fileID: 95000010596400782}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: bottle_blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 4000011383747138}
   - component: {fileID: 198000012568190312}
   - component: {fileID: 199000013901236792}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: StarsParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4826,7 +4826,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000012798377608}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4859,8 +4859,9 @@ GameObject:
   - component: {fileID: 4000011650569256}
   - component: {fileID: 4173384454104991768}
   - component: {fileID: 7991040731092807312}
-  m_Layer: 0
-  m_Name: Bottle_Mana
+  - component: {fileID: 5538847422617009677}
+  m_Layer: 19
+  m_Name: BlueBottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4890,12 +4891,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000013317980782}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.16650133
+  m_Radius: 0.20757228
   m_Height: 0.60586524
   m_Direction: 1
-  m_Center: {x: 0, y: 0.015159011, z: 0.06063609}
+  m_Center: {x: 0.041070938, y: 0.015159011, z: 0.060636103}
 --- !u!114 &7991040731092807312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4909,6 +4910,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragSettings: {fileID: 11400000, guid: 8e39a5edc56ba4bc9a0c6efb22a3e02c, type: 2}
+--- !u!114 &5538847422617009677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013317980782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb1f7e3b1c7544149abf8bac3fe4d64c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1000013970829164
 GameObject:
   m_ObjectHideFlags: 0
@@ -4920,7 +4933,7 @@ GameObject:
   - component: {fileID: 4000011123859100}
   - component: {fileID: 198000012251097790}
   - component: {fileID: 199000011921518788}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: GlowParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

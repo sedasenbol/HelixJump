@@ -7,7 +7,7 @@ namespace Pool
     public class Pool : MonoBehaviour
     {
         [SerializeField] private PoolSettingsScriptableObject poolSettings;
-
+        
         private Queue<GameObject> itemPoolQueue;
 
         public Transform SpawnFromPool(Vector3 position, Quaternion rotation)

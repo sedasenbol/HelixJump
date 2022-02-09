@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using Pool;
 
 
@@ -23,12 +24,14 @@ namespace GameCore
         // Called by Ball.cs when the ball hits an unsafe platform.
         public void HandleFailedLevel()
         {
+            DOTween.CompleteAll();
             OnLevelFailed?.Invoke();
         }
 
         // Called by Ball.cs when the ball hits the last platform.
         public void HandleCompletedLevel()
         {
+            DOTween.CompleteAll();
             OnLevelCompleted?.Invoke();
         }
     }

@@ -12,7 +12,6 @@ namespace Player
     public class Ball : MonoBehaviour
     {
         public static event Action OnBallsFirstHit;
-        public static event Action OnBallHitSafePlatform;
 
         [SerializeField] private BallBounceSettingsScriptableObject ballBounceSettings;
         [SerializeField] private Rigidbody rb;

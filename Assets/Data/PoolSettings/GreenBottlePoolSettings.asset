@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bfa6af44d6b14deb925603a00958d6e, type: 3}
   m_Name: GreenBottlePoolSettings
   m_EditorClassIdentifier: 
-  poolSize: 5
-  itemTransform: {fileID: 4000013828724138, guid: 11e31a2ebb4e6e246bcf8c0ba034a031,
-    type: 3}
+  poolSize: 10
+  itemPrefab: {fileID: 4000013828724138, guid: 11e31a2ebb4e6e246bcf8c0ba034a031, type: 3}

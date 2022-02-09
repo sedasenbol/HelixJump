@@ -6,9 +6,9 @@ namespace ScriptableObjects
     public class BlueBottleSettingsScriptableObject : ScriptableObject
     {
         [SerializeField] private float spawnProbabilityOnPlatform = 0.05f;
-        [SerializeField] private float heightOnPlatformGroup = 2f;
-
+        [SerializeField] private float disabledPlatformDuration = 5f;
+        
         public float SpawnProbabilityOnPlatform => spawnProbabilityOnPlatform;
-        public float HeightOnPlatformGroup => heightOnPlatformGroup;
+        public float DisabledPlatformDuration => disabledPlatformDuration;
     }
 }

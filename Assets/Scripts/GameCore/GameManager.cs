@@ -1,5 +1,6 @@
 using System;
 using Camera;
+using DG.Tweening;
 using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,8 @@ namespace GameCore
 {
     public class GameManager : Singleton<GameManager>
     {
+        private const int TWEENERS_CAPACITY = 500;
+
         private readonly GameInfo gameInfo = new GameInfo();
 
         private void Start()
@@ -21,6 +24,8 @@ namespace GameCore
             
             UIManager.Instance.Initialize(gameInfo.BestScore, gameInfo.CurrentLevelIndex);
             ScoreManager.Instance.Initialize(gameInfo.BestScore);
+            
+            DOTween.SetTweensCapacity(TWEENERS_CAPACITY, 0);
             
             LoadGameScene();
         }

@@ -108,11 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b43dda33c24416199a5555a534c509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformGroupSpawnSettings: {fileID: 11400000, guid: f14df34ba88104bea832867a9ede1e87,
-    type: 2}
   ballBounceSettings: {fileID: 11400000, guid: cd228ab5cd1074bd783bd67b0aae11bd, type: 2}
   rb: {fileID: 671707748474100641}
-  meshRenderer: {fileID: 3011543923640951156}
 --- !u!54 &671707748474100641
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -123,7 +120,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 1e+14
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0

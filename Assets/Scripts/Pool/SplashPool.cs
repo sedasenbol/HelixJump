@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ScriptableObjects;
 using UnityEngine;
 
 
@@ -40,11 +41,6 @@ namespace Pool
                 obj.SetActive(false);
                 newItemPool.Enqueue(obj);
             }
-        }
-
-        private void OnEnable()
-        {
-            InitializeItemPoolDict();
         }
 
         private void OnDisable()

@@ -32,25 +32,6 @@ namespace UI
             currentLevelText.text = (currentLevelIndex + 1).ToString("F0");
             nextLevelText.text = (currentLevelIndex + 2).ToString("F0");
         }
-        
-        private void OnEnable()
-        {
-            pauseButton.SetActive(true);
-            resumeButton.SetActive(false);
-            successPanel.SetActive(false);
-            gameOverPanel.SetActive(false);
-            completedTMPText.gameObject.SetActive(false);
-            scoreTMPText.gameObject.SetActive(true);
-            bestScoreTMPText.gameObject.SetActive(true);
-            progressSlider.value = 0f;
-
-            BallProgressTracker.OnBallProgressed += OnBallProgressed;
-        }
-
-        private void OnDisable()
-        {
-            BallProgressTracker.OnBallProgressed -= OnBallProgressed;
-        }
 
         private void OnBallProgressed(int ballProgressPercentage)
         {
@@ -117,6 +98,25 @@ namespace UI
         {
             scoreTMPText.text = currentScore.ToString("F0");
             bestScoreTMPText.text = $"BEST: {bestScore}";
+        }
+        
+        private void OnEnable()
+        {
+            pauseButton.SetActive(true);
+            resumeButton.SetActive(false);
+            successPanel.SetActive(false);
+            gameOverPanel.SetActive(false);
+            completedTMPText.gameObject.SetActive(false);
+            scoreTMPText.gameObject.SetActive(true);
+            bestScoreTMPText.gameObject.SetActive(true);
+            progressSlider.value = 0f;
+
+            BallProgressTracker.OnBallProgressed += OnBallProgressed;
+        }
+
+        private void OnDisable()
+        {
+            BallProgressTracker.OnBallProgressed -= OnBallProgressed;
         }
     }
 }

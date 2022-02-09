@@ -10,13 +10,14 @@ namespace Platforms
     {
         [SerializeField] private PlatformBreakSettingsScriptableObject platformBreakSettings;
         
+        //Called by BallProgressTracker.cs when the platform group should break.
         public void BreakMyPlatforms()
         {
-            var childrenPlatformFlyers = GetComponentsInChildren<PlatformFlyer>();
+            var childrenPlatformBreakers = GetComponentsInChildren<PlatformBreaker>();
 
-            foreach (var platformFlyer in childrenPlatformFlyers)
+            foreach (var platformBreaker in childrenPlatformBreakers)
             {
-                platformFlyer.FlyAway();
+                platformBreaker.Break();
             }
 
             GetComponent<PlatformGroupRotator>().enabled = false;

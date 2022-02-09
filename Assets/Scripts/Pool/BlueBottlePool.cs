@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using ScriptableObjects;
 using UnityEngine;
 
 namespace Pool
 {
-    public class GreenBottlePool : Singleton<GreenBottlePool>
+    public class BlueBottlePool : Singleton<BlueBottlePool>
     {
         [SerializeField] private PoolSettingsScriptableObject poolSettings;
 
@@ -41,6 +40,11 @@ namespace Pool
                 obj.SetActive(false);
                 newItemPool.Enqueue(obj);
             }
+        }
+
+        private void OnEnable()
+        {
+            InitializeItemPoolDict();
         }
 
         private void OnDisable()

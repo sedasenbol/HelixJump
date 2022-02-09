@@ -7,12 +7,18 @@ namespace Spawners
     public class PickUpSpawner : MonoBehaviour
     {
         [SerializeField] private GreenBottleSettingsScriptableObject greenBottleSettings;
+        [SerializeField] private BlueBottleSettingsScriptableObject blueBottleSettings;
         [SerializeField] private Transform ballTransform;
         
         public void ReceivePotentialSpawnPlace(Transform platformGroup)
         {
-            var shouldSpawnGreenBottle = Random.Range(0f, 1f) < greenBottleSettings.SpawnProbabilityOnPlatform;
+            var randomProbability = Random.Range(0f, 1f);
+            var shouldSpawnGreenBottle = randomProbability < greenBottleSettings.SpawnProbabilityOnPlatform;
+            var shouldSpawnBlueBottle = randomProbability > greenBottleSettings.SpawnProbabilityOnPlatform && randomProbability
+                < greenBottleSettings.SpawnProbabilityOnPlatform + blueBottleSettings.SpawnProbabilityOnPlatform;
 
+            if (shouldSpawnBlueBottle) { SpawnBlueBottle(platformGroup, GetSpawnPosition(platformGroup));}
+            
             if (!shouldSpawnGreenBottle) {return;}
             
             SpawnGreenBottle(platformGroup, GetSpawnPosition(platformGroup));
@@ -32,6 +38,13 @@ namespace Spawners
             return firstSpawnPosition;
         }
 
+        private void SpawnBlueBottle(Transform platformGroupTransform, Vector3 firstSpawnPosition)
+        {
+            var greenBottle = BlueBottlePool.Instance.SpawnFromPool(firstSpawnPosition, Quaternion.identity);
+
+            greenBottle.RotateAround(platformGroupTransform.position, Vector3.up, Random.Range(0f,360f));
+        } 
+        
         private void SpawnGreenBottle(Transform platformGroupTransform, Vector3 firstSpawnPosition)
         {
             var greenBottle = GreenBottlePool.Instance.SpawnFromPool(firstSpawnPosition, Quaternion.identity);

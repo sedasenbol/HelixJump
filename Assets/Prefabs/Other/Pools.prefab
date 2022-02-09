@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9091027223259232730}
   - component: {fileID: 796202281140000336}
   - component: {fileID: 2761485835155952700}
+  - component: {fileID: 2423787054997508628}
   m_Layer: 0
   m_Name: Pools
   m_TagString: Untagged
@@ -45,10 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolSettings: {fileID: 11400000, guid: 51387674c87a04f3aaf87771a2e50f62, type: 2}
-  itemTransform: {fileID: 8385901116453798367, guid: ec21e3659a1f34552979396bd48cce60,
-    type: 3}
-  itemContainerTransform: {fileID: 1534957623158410447, guid: 5be66c47cae60472287ddaab6d84321b,
-    type: 3}
 --- !u!114 &2761485835155952700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +59,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolSettings: {fileID: 11400000, guid: 1a63be255c3cd49d7a53eb805e5b5593, type: 2}
-  itemTransform: {fileID: 4000013828724138, guid: 11e31a2ebb4e6e246bcf8c0ba034a031,
-    type: 3}
-  itemContainerTransform: {fileID: 8095617440620039112, guid: 1803401a1818b414890c53b1d3637e71,
-    type: 3}
+--- !u!114 &2423787054997508628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9091027223259232728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2d4416497245be87dd82b17e94372f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolSettings: {fileID: 11400000, guid: 697877799afe4466288536f7b972207f, type: 2}

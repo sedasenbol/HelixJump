@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4678337019947972405}
   - component: {fileID: 4678337019947972406}
-  - component: {fileID: 4678337021379360174}
+  - component: {fileID: 969207980654319178}
   m_Layer: 11
   m_Name: Spawners
   m_TagString: Untagged
@@ -46,11 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformGroupSpawnSettings: {fileID: 11400000, guid: f14df34ba88104bea832867a9ede1e87,
     type: 2}
-  ballProgressTracker: {fileID: 1295281970952308711, guid: 4cd264d81ba21479a848fd7281630bba,
-    type: 3}
+  ballProgressTracker: {fileID: 0}
   platformGroupContainer: {fileID: 0}
-  pickUpSpawner: {fileID: 4678337021379360174}
---- !u!114 &4678337021379360174
+  pickUpSpawner: {fileID: 969207980654319178}
+--- !u!114 &969207980654319178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,9 +58,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4678337019947972404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d07bc71f989e49b49a990f69d6f5af9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 7139fc357eb4484eb4422966d191af08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpSpawnSettings: {fileID: 11400000, guid: 721947d1082634466945deebeb9a7121,
+  greenBottleSettings: {fileID: 11400000, guid: 721947d1082634466945deebeb9a7121,
     type: 2}
+  blueBottleSettings: {fileID: 11400000, guid: 50e72ea0a18914c7dbba6bc05809c6ae, type: 2}
   ballTransform: {fileID: 0}

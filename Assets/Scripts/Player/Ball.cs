@@ -130,9 +130,6 @@ namespace Player
 
             var splash = SplashPool.Instance.SpawnFromPool(spawnPos, Quaternion.identity);
             splash.parent = platformGO.transform;
-            
-            var platformFlyer = platformGO.GetComponent<PlatformFlyer>();
-            if (!platformFlyer) {return;}
         }
     
         private void OnEnable()

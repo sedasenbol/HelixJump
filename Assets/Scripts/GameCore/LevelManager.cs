@@ -15,6 +15,7 @@ namespace GameCore
         {
             SplashPool.Instance.InitializeItemPoolDict();
             GreenBottlePool.Instance.InitializeItemPoolDict();
+            BlueBottlePool.Instance.InitializeItemPoolDict();
             
             OnNewLevelLoaded?.Invoke();
         }

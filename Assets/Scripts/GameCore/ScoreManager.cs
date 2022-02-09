@@ -13,11 +13,13 @@ namespace GameCore
         private int currentScore;
         private int bestScore;
 
+        //Called by GameManager.cs on start. 
         public void Initialize(int bestScore)
         {
             this.bestScore = bestScore;
         }
 
+        //Called by BallProgressTracker.cs when a platform group is broken. 
         public void IncreaseScore(int consecutiveBallProgressCounter)
         {
             currentScore += (GameManager.Instance.GameInformation.CurrentLevelIndex + 1) * consecutiveBallProgressCounter;
@@ -35,6 +37,7 @@ namespace GameCore
             OnBestScoreChanged?.Invoke(bestScore);
         }
 
+        //Called by GameManager.cs when a new level is about to load.
         public void ResetCurrentScore()
         {
             currentScore = 0;

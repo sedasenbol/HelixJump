@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "PoolSettings", menuName = "ScriptableObjects/PoolSettings", order = 1)]
-public class PoolSettingsScriptableObject : ScriptableObject
+namespace ScriptableObjects
 {
-    [SerializeField] private int poolSize;
-    [SerializeField] private Transform itemTransform;
+    [CreateAssetMenu(fileName = "PoolSettings", menuName = "ScriptableObjects/PoolSettings", order = 1)]
+    public class PoolSettingsScriptableObject : ScriptableObject
+    {
+        [SerializeField] private int poolSize;
+        [SerializeField] private Transform itemTransform;
     
-    public int PoolSize => poolSize;
-    public Transform ItemTransform => itemTransform;
+        public int PoolSize => poolSize;
+        public Transform ItemTransform => itemTransform;
+    }
 }

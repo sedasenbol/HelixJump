@@ -8,13 +8,14 @@ using UnityEngine;
 
 namespace Platforms
 {
-    public class PlatformFlyer : MonoBehaviour
+    public class PlatformBreaker : MonoBehaviour
     {
         [SerializeField] private PlatformBreakSettingsScriptableObject platformBreakSettings;
         
         private Transform myTransform;
         
-        public void FlyAway()
+        // Called by its parent's PlatformGroupBreaker.cs component when the the platform should break.
+        public void Break()
         {
             myTransform.GetComponentInChildren<Collider>().enabled = false;
 

@@ -113,7 +113,6 @@ namespace Player
         }
 
         public int BallProgressPercentage =>
-            (int)Math.Floor(100 * ((float)currentPlatformGroupIndex /
-                                     (platformGroupSpawnSettings.TotalPlatformGroupCount - 1)));
+            (int)Math.Floor(100 * ((float)currentPlatformGroupIndex / (platformGroupSpawnSettings.TotalPlatformGroupCount - 1)));
     }
 }

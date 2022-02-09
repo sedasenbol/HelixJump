@@ -445,6 +445,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 969207980654319178, guid: 6605ac3cecfa34f42a1d00abdc39fe13,
+        type: 3}
+      propertyPath: ballTransform
+      value: 
+      objectReference: {fileID: 2252535607781647573}
     - target: {fileID: 4678337019947972404, guid: 6605ac3cecfa34f42a1d00abdc39fe13,
         type: 3}
       propertyPath: m_Name
@@ -507,11 +512,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4678337019947972406, guid: 6605ac3cecfa34f42a1d00abdc39fe13,
         type: 3}
-      propertyPath: pickUpSpawner
-      value: 
-      objectReference: {fileID: 4678337021379360174}
-    - target: {fileID: 4678337019947972406, guid: 6605ac3cecfa34f42a1d00abdc39fe13,
-        type: 3}
       propertyPath: ballProgressTracker
       value: 
       objectReference: {fileID: 1032733900}
@@ -520,41 +520,8 @@ PrefabInstance:
       propertyPath: platformGroupContainer
       value: 
       objectReference: {fileID: 3504112895784568935}
-    - target: {fileID: 4678337021379360174, guid: 6605ac3cecfa34f42a1d00abdc39fe13,
-        type: 3}
-      propertyPath: ballTransform
-      value: 
-      objectReference: {fileID: 2252535607781647573}
-    - target: {fileID: 4678337021379360174, guid: 6605ac3cecfa34f42a1d00abdc39fe13,
-        type: 3}
-      propertyPath: pickUpSpawnSettings
-      value: 
-      objectReference: {fileID: 11400000, guid: 721947d1082634466945deebeb9a7121,
-        type: 2}
-    m_RemovedComponents:
-    - {fileID: 4678337021379360174, guid: 6605ac3cecfa34f42a1d00abdc39fe13, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6605ac3cecfa34f42a1d00abdc39fe13, type: 3}
---- !u!1 &4678337021379360173 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4678337019947972404, guid: 6605ac3cecfa34f42a1d00abdc39fe13,
-    type: 3}
-  m_PrefabInstance: {fileID: 4678337021379360172}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4678337021379360174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4678337021379360173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7139fc357eb4484eb4422966d191af08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  greenBottleSettings: {fileID: 11400000, guid: 721947d1082634466945deebeb9a7121,
-    type: 2}
-  ballTransform: {fileID: 2252535607781647573}
 --- !u!1001 &6583274306346353633
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,7 +5,9 @@ namespace GameCore
         public State CurrentState { get; set; } = State.Start;
         public Scene CurrentScene { get; set; } = Scene.MainMenu;
         public int CurrentLevelIndex { get; set; } // Starts with 0.
-        
+
+        public int BestScore { get; set; }
+
         public enum State
         {
             Start,

@@ -12,15 +12,15 @@ namespace ScriptableObjects
         [SerializeField] private Vector3 cylinderDefaultScale = new Vector3(2f, 1f, 2f);
         [SerializeField] private float cylinderHeightMargin = 3f;
         
-        [SerializeField] private Transform firstPlatformGroupPlatform;
-        [SerializeField] private Transform lastPlatformGroupPlatform;
+        [SerializeField] private Transform firstPlatformGroupTransform;
+        [SerializeField] private Transform lastPlatformGroupTransform;
         [SerializeField] private Transform cylinderTransform;
 
         [SerializeField] private List<Transform> randomPlatformGroupsToSpawn;
         
         public int TotalPlatformGroupCount => totalPlatformGroupCount;
-        public Transform FirstPlatformGroupPlatform => firstPlatformGroupPlatform;
-        public Transform LastPlatformGroupPlatform => lastPlatformGroupPlatform;
+        public Transform FirstPlatformGroupTransform => firstPlatformGroupTransform;
+        public Transform LastPlatformGroupTransform => lastPlatformGroupTransform;
         public Vector3 PlatformGroupStartPos => platformGroupStartPos;
         public List<Transform> RandomPlatformGroupsToSpawn => randomPlatformGroupsToSpawn;
         public Vector3 DistanceBtwPlatformGroups => distanceBtwPlatformGroups;

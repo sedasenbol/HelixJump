@@ -21,9 +21,9 @@ TagManager:
   - TouchController
   - Ball
   - Platform/LastPlatform
-  - 
-  - 
-  - 
+  - Splash
+  - Platform/UnsafeLongPlatform
+  - Bottle/Green
   - 
   - 
   - 

@@ -1,5 +1,9 @@
 using System;
+using GameCore;
+using Player;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -12,28 +16,61 @@ namespace UI
 
         [SerializeField] private GameObject pauseButton;
         [SerializeField] private GameObject resumeButton;
-        [SerializeField] private GameObject tapToRestartUI;
-        [SerializeField] private GameObject tapToContinueUI;
+        [SerializeField] private TMP_Text completedTMPText;
+        [SerializeField] private TMP_Text scoreTMPText;
+        [SerializeField] private TMP_Text bestScoreTMPText;
+        [SerializeField] private GameObject successPanel;
+        [SerializeField] private GameObject gameOverPanel;
+        [SerializeField] private Slider progressSlider;
+        [SerializeField] private TMP_Text currentLevelText;
+        [SerializeField] private TMP_Text nextLevelText;
+        
+        
+        public void Initialize(int bestScore, int currentLevelIndex)
+        {
+            bestScoreTMPText.text = bestScore.ToString("F0");
+            currentLevelText.text = (currentLevelIndex + 1).ToString("F0");
+            nextLevelText.text = (currentLevelIndex + 2).ToString("F0");
+        }
         
         private void OnEnable()
         {
             pauseButton.SetActive(true);
             resumeButton.SetActive(false);
-            tapToRestartUI.SetActive(false);
-            tapToContinueUI.SetActive(false);
+            successPanel.SetActive(false);
+            gameOverPanel.SetActive(false);
+            completedTMPText.gameObject.SetActive(false);
+            scoreTMPText.gameObject.SetActive(true);
+            bestScoreTMPText.gameObject.SetActive(true);
+            progressSlider.value = 0f;
+
+            BallProgressTracker.OnBallProgressed += OnBallProgressed;
+        }
+
+        private void OnDisable()
+        {
+            BallProgressTracker.OnBallProgressed -= OnBallProgressed;
+        }
+
+        private void OnBallProgressed(int ballProgressPercentage)
+        {
+            progressSlider.value = ballProgressPercentage;
         }
 
         public void ShowFailScreen()
         {
             pauseButton.SetActive(false);
             resumeButton.SetActive(false);
-            tapToRestartUI.SetActive(true);
+            gameOverPanel.SetActive(true);
+            bestScoreTMPText.gameObject.SetActive(false);
+
+            completedTMPText.text = $"%{BallProgressTracker.Instance.BallProgressPercentage} completed";
         }
 
         public void ShowSuccessScreen()
         {
             pauseButton.SetActive(false);
-            tapToContinueUI.SetActive(true);
+            successPanel.SetActive(true);
         }
 
         public void HandlePauseButtonClick()
@@ -54,18 +91,32 @@ namespace UI
 
         public void HandleTapToContinueClick()
         {
-            tapToContinueUI.SetActive(false);
-            pauseButton.SetActive(true);
-            
             OnTapToContinueButtonClicked?.Invoke();
+
+            successPanel.SetActive(false);
+            pauseButton.SetActive(true);
+            bestScoreTMPText.gameObject.SetActive(true);
+            progressSlider.value = 0f;
+            currentLevelText.text = (GameManager.Instance.GameInformation.CurrentLevelIndex + 1).ToString("F0");
+            nextLevelText.text = (GameManager.Instance.GameInformation.CurrentLevelIndex + 2).ToString("F0");
         }
 
         public void HandleTapToRestartClick()
         {
-            tapToRestartUI.SetActive(false);
-            pauseButton.SetActive(true);
-            
             OnTapToRestartButtonClicked?.Invoke();
+
+            gameOverPanel.SetActive(false);
+            pauseButton.SetActive(true);
+            bestScoreTMPText.gameObject.SetActive(true);
+            progressSlider.value = 0f;
+            currentLevelText.text = (GameManager.Instance.GameInformation.CurrentLevelIndex + 1).ToString("F0");
+            nextLevelText.text = (GameManager.Instance.GameInformation.CurrentLevelIndex + 2).ToString("F0");
+        }
+
+        public void UpdateScoreTexts(int currentScore, int bestScore)
+        {
+            scoreTMPText.text = currentScore.ToString("F0");
+            bestScoreTMPText.text = $"BEST: {bestScore}";
         }
     }
 }

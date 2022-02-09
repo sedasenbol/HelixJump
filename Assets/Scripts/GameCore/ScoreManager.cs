@@ -1,12 +1,45 @@
-﻿using ScriptableObjects;
+﻿using System;
+using Player;
+using ScriptableObjects;
+using UI;
 using UnityEngine;
 
 namespace GameCore
 {
     public class ScoreManager : Singleton<ScoreManager>
     {
-        [SerializeField] private ScoreSettingsScriptableObject scoreSettings;
-        
-        
+        public static event Action<int> OnBestScoreChanged;
+    
+        private int currentScore;
+        private int bestScore;
+
+        public void Initialize(int bestScore)
+        {
+            this.bestScore = bestScore;
+        }
+
+        public void IncreaseScore(int consecutiveBallProgressCounter)
+        {
+            currentScore += (GameManager.Instance.GameInformation.CurrentLevelIndex + 1) * consecutiveBallProgressCounter;
+
+            CheckBestScore();
+            
+            UIManager.Instance.UpdateScoreTexts(currentScore, bestScore);
+        }
+
+        private void CheckBestScore()
+        {
+            if (bestScore >= currentScore) {return;}
+
+            bestScore = currentScore;
+            OnBestScoreChanged?.Invoke(bestScore);
+        }
+
+        public void ResetCurrentScore()
+        {
+            currentScore = 0;
+            
+            UIManager.Instance.UpdateScoreTexts(currentScore, bestScore);
+        }
     }
 }

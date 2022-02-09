@@ -1,18 +1,28 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using GameCore;
+using PickUps;
 using Platforms;
+using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace Player
 {
     public class BallProgressTracker : Singleton<BallProgressTracker>
     {
+        public static event Action<int> OnBallProgressed;
+        
+        [SerializeField] private PlatformGroupSpawnSettingsScriptableObject platformGroupSpawnSettings;
+        [SerializeField] private GreenBottleSettingsScriptableObject greenBottleSettings;
+        
         private bool isGameActive;
         private Transform ballTransform;
         private List<Transform> platformGroupTransforms;
 
-        private int currentPlatformIndex;
+        private int currentPlatformGroupIndex;
+        private int consecutiveBallProgressCounter;
         
         public void Initialize(List<Transform> platformGroupTransforms)
         {
@@ -35,25 +45,75 @@ namespace Player
         {
             if (!isGameActive) {return;}
 
-            var currentPlatformGroup = platformGroupTransforms[currentPlatformIndex];
+            if (currentPlatformGroupIndex + 1 >= platformGroupSpawnSettings.TotalPlatformGroupCount) {return;}
+            
+            var currentPlatformGroup = platformGroupTransforms[currentPlatformGroupIndex];
 
             if (ballTransform.position.y > currentPlatformGroup.position.y) {return;}
 
-            currentPlatformGroup.GetComponent<PlatformGroupBreaker>().BreakMyPlatforms();
-            currentPlatformIndex++;
-            Debug.Log(currentPlatformIndex);
+            BreakNextPlatformGroup();
+        }
+
+        private void BreakNextPlatformGroup()
+        {
+            if (currentPlatformGroupIndex + 1 >= platformGroupSpawnSettings.TotalPlatformGroupCount) {return;}
+
+            platformGroupTransforms[currentPlatformGroupIndex].GetComponent<PlatformGroupBreaker>().BreakMyPlatforms();
+            consecutiveBallProgressCounter++;
+            currentPlatformGroupIndex++;
+            
+            ScoreManager.Instance.IncreaseScore(consecutiveBallProgressCounter);
+            OnBallProgressed?.Invoke(BallProgressPercentage);
+        }
+
+        public bool IsBallOnConsecutiveProgress()
+        {
+            if (consecutiveBallProgressCounter <= 2)
+            {
+                consecutiveBallProgressCounter = 0;
+                return false;
+            }
+            
+            BreakNextPlatformGroup();
+            consecutiveBallProgressCounter = 0;
+            return true;
+        }
+
+        private void OnGreenBottlePickedUp()
+        {
+            StartCoroutine(BreakThreePlatformGroups());
+        }
+
+        private IEnumerator BreakThreePlatformGroups()
+        {
+            for (var i = 0; i < greenBottleSettings.PlatformBreakCount; i++)
+            {
+                if (!isGameActive) {break;}
+         
+                BreakNextPlatformGroup();
+                
+                yield return new WaitForSeconds(greenBottleSettings.DurationBetweenPlatformBreaks);                
+            }
         }
 
         private void OnEnable()
         {
             LevelManager.OnLevelFailed += OnLevelEnd;
             LevelManager.OnLevelCompleted += OnLevelEnd;
+
+            GreenBottle.OnGreenBottlePickedUp += OnGreenBottlePickedUp;
         }
 
         private void OnDisable()
         {
             LevelManager.OnLevelFailed -= OnLevelEnd;
             LevelManager.OnLevelCompleted -= OnLevelEnd;
+            
+            GreenBottle.OnGreenBottlePickedUp -= OnGreenBottlePickedUp;
         }
+
+        public int BallProgressPercentage =>
+            (int)Math.Floor(100 * ((float)currentPlatformGroupIndex /
+                                     (platformGroupSpawnSettings.TotalPlatformGroupCount - 1)));
     }
 }

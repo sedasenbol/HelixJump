@@ -3,6 +3,7 @@ using Camera;
 using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace GameCore
 {
@@ -12,8 +13,14 @@ namespace GameCore
 
         private void Start()
         {
+            gameInfo.CurrentLevelIndex = PlayerPrefs.GetInt("CurrentLevelIndex", 0);
+            gameInfo.BestScore = PlayerPrefs.GetInt("BestScore", 0);
+            
             gameInfo.CurrentScene = GameInfo.Scene.MainMenu;
             gameInfo.CurrentState = GameInfo.State.Start;
+            
+            UIManager.Instance.Initialize(gameInfo.BestScore, gameInfo.CurrentLevelIndex);
+            ScoreManager.Instance.Initialize(gameInfo.BestScore);
             
             LoadGameScene();
         }
@@ -21,6 +28,8 @@ namespace GameCore
         private void LoadGameScene()
         {
             SceneManager.LoadScene((int) GameInfo.Scene.Game, LoadSceneMode.Additive);
+            
+            ScoreManager.Instance.ResetCurrentScore();
         }
 
         private void OnLevelFailed()
@@ -78,6 +87,18 @@ namespace GameCore
             
             LoadGameScene();
         }
+
+        private void OnBestScoreChanged(int bestScore)
+        {
+            gameInfo.BestScore = bestScore;
+        }
+
+        private void SaveData()
+        {
+            PlayerPrefs.SetInt("CurrentLevelIndex", gameInfo.CurrentLevelIndex);
+            PlayerPrefs.SetInt("BestScore", gameInfo.BestScore);
+            PlayerPrefs.Save();
+        }
         
         private void OnEnable()
         {
@@ -88,6 +109,8 @@ namespace GameCore
             
             LevelManager.OnLevelFailed += OnLevelFailed;
             LevelManager.OnLevelCompleted += OnLevelCompleted;
+
+            ScoreManager.OnBestScoreChanged += OnBestScoreChanged; 
             
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
@@ -102,7 +125,11 @@ namespace GameCore
             LevelManager.OnLevelFailed -= OnLevelFailed;
             LevelManager.OnLevelCompleted -= OnLevelCompleted;
             
+            ScoreManager.OnBestScoreChanged -= OnBestScoreChanged;
+            
             SceneManager.sceneLoaded -= OnSceneLoaded;
+
+            SaveData();
         }
 
         public GameInfo GameInformation => gameInfo;

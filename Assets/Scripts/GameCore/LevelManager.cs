@@ -1,4 +1,5 @@
 using System;
+using Pool;
 
 
 namespace GameCore
@@ -12,6 +13,9 @@ namespace GameCore
         // Called by GameManager.cs when "Game" scene is loaded. 
         public void HandleNewLevel()
         {
+            SplashPool.Instance.InitializeItemPoolDict();
+            GreenBottlePool.Instance.InitializeItemPoolDict();
+            
             OnNewLevelLoaded?.Invoke();
         }
 

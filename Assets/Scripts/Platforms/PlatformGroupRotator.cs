@@ -1,32 +1,32 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Input;
+﻿using Input;
 using ScriptableObjects;
 using UnityEngine;
 
-public class PlatformGroupRotator : MonoBehaviour
+namespace Platforms
 {
-    [SerializeField] private DragSettingsScriptableObject dragSettings;
-
-    private Transform myTransform;
-
-    private void OnPlayerDragged(Vector3 dragVector)
+    public class PlatformGroupRotator : MonoBehaviour
     {
-        myTransform.Rotate(Vector3.up, -dragVector.x * dragSettings.DragToAngleFactor);
-    }
+        [SerializeField] private DragSettingsScriptableObject dragSettings;
+
+        private Transform myTransform;
+
+        private void OnPlayerDragged(Vector3 dragVector)
+        {
+            myTransform.Rotate(Vector3.up, -dragVector.x * dragSettings.DragToAngleFactor);
+        }
     
-    private void OnEnable()
-    {
-        myTransform = transform;
+        private void OnEnable()
+        {
+            myTransform = transform;
         
-        TouchController.OnPlayerDragged += OnPlayerDragged;
-    }
+            TouchController.OnPlayerDragged += OnPlayerDragged;
+        }
 
-    private void OnDisable()
-    {
-        myTransform = null;
+        private void OnDisable()
+        {
+            myTransform = null;
         
-        TouchController.OnPlayerDragged -= OnPlayerDragged;
+            TouchController.OnPlayerDragged -= OnPlayerDragged;
+        }
     }
 }

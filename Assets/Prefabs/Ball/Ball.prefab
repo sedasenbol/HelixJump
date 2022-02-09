@@ -108,6 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b43dda33c24416199a5555a534c509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformGroupSpawnSettings: {fileID: 11400000, guid: f14df34ba88104bea832867a9ede1e87,
+    type: 2}
   ballBounceSettings: {fileID: 11400000, guid: cd228ab5cd1074bd783bd67b0aae11bd, type: 2}
   rb: {fileID: 671707748474100641}
   meshRenderer: {fileID: 3011543923640951156}

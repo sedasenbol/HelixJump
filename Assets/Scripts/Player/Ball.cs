@@ -1,29 +1,34 @@
 using System;
+using DG.Tweening;
 using GameCore;
+using Platforms;
 using Pool;
+using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Player
 {
     public class Ball : MonoBehaviour
     {
-        public static event Action OnBallsFirstHit; 
+        public static event Action OnBallsFirstHit;
+        public static event Action OnBallHitSafePlatform;
 
         [SerializeField] private BallBounceSettingsScriptableObject ballBounceSettings;
         [SerializeField] private Rigidbody rb;
-        [SerializeField] private MeshRenderer meshRenderer;
         
         private int safePlatformLayer;
         private int unsafePlatformLayer;
         private int lastPlatformLayer;
+        private int unsafeLongPlatformLayer;
 
         private bool ballHitTheFirstPlatform;
         
         private Transform myTransform;
-        private Vector3 splashSpawnRelativePos;
+        private Vector3 initialScale;
 
         private bool isActive;
-
+        
         private void FixedUpdate()
         {
             if (rb.velocity.sqrMagnitude < Mathf.Pow(ballBounceSettings.MaxVelocityMagnitude,2)) {return;}
@@ -39,16 +44,44 @@ namespace Player
             
             if (otherLayer == unsafePlatformLayer)
             {
+                if (BallProgressTracker.Instance.IsBallOnConsecutiveProgress())
+                {
+                    ChangeScale();
+                    BounceBall();
+                    return;
+                }
+                
                 LevelManager.Instance.HandleFailedLevel();
 
                 isActive = false;
                 rb.Sleep();
+                
+                SpawnSplash(collision.gameObject);
+                ChangeScale();
+            }
+            else if (otherLayer == unsafeLongPlatformLayer)
+            {
+                if (BallProgressTracker.Instance.IsBallOnConsecutiveProgress())
+                {
+                    ChangeScale();
+                    BounceBall();
+                    return;
+                }
+                
+                LevelManager.Instance.HandleFailedLevel();
+
+                isActive = false;
+                rb.Sleep();
+                
+                ChangeScale();
             }
             else if (otherLayer == safePlatformLayer)
             {
-                var splashSpawnPoint = myTransform.position + splashSpawnRelativePos;
-                SpawnSplash(splashSpawnPoint, collision.gameObject.transform);
+                BallProgressTracker.Instance.IsBallOnConsecutiveProgress();
+                
+                SpawnSplash(collision.gameObject);
                 BounceBall();
+                ShakeScale();
                 
                 if (ballHitTheFirstPlatform) {return;}
                 
@@ -63,28 +96,57 @@ namespace Player
             }
         }
 
+        private void ShakeScale()
+        {
+            myTransform.DOShakeScale(0.5f, 0.1f, 1, 90f, true);
+        }
+
+        private void ChangeScale()
+        {
+            myTransform.DOScale(ballBounceSettings.BallScaleOnUnsafePlatformHit, ballBounceSettings.BallScaleDurationOnUnsafePlatformHit)
+            .SetEase(Ease.InOutSine).OnComplete(() =>
+                {
+                    if (!isActive) {return;}
+                    
+                    myTransform.DOScale(initialScale, ballBounceSettings.BallScaleDurationOnUnsafePlatformHit).SetEase(Ease.InOutSine);
+                });
+        }
+
         private void BounceBall()
         {
             rb.velocity = Vector3.up * ballBounceSettings.JumpVelocity;
         }
 
-        private void SpawnSplash(Vector3 spawnPos, Transform platformTransform)
+        private void SpawnSplash(GameObject platformGO)
         {
+            var myPosition = myTransform.position;
+            
+            var spawnPos = new Vector3()
+            {
+                x = myPosition.x,
+                y = platformGO.GetComponentInChildren<Renderer>().bounds.max.y,
+                z = myPosition.z
+            };
+
             var splash = SplashPool.Instance.SpawnFromPool(spawnPos, Quaternion.identity);
-            splash.parent = platformTransform;
+            splash.parent = platformGO.transform;
+            
+            var platformFlyer = platformGO.GetComponent<PlatformFlyer>();
+            if (!platformFlyer) {return;}
         }
     
         private void OnEnable()
         {
             myTransform = transform;
-
-            splashSpawnRelativePos = new Vector3(0f, -meshRenderer.bounds.extents.y, 0f);
-        
+            
             safePlatformLayer = LayerMask.NameToLayer("Platform/SafePlatform");
             unsafePlatformLayer = LayerMask.NameToLayer("Platform/UnsafePlatform");
             lastPlatformLayer = LayerMask.NameToLayer("Platform/LastPlatform");
+            unsafeLongPlatformLayer = LayerMask.NameToLayer("Platform/UnsafeLongPlatform");
 
             isActive = true;
+
+            initialScale = myTransform.localScale;
         }
 
         private void OnDisable()

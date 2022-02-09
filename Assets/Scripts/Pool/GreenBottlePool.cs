@@ -5,47 +5,29 @@ using UnityEngine;
 
 namespace Pool
 {
-    public class GreenBottlePool : Singleton<GreenBottlePool>
+    public class GreenBottlePool : Pool
     {
-        [SerializeField] private PoolSettingsScriptableObject poolSettings;
-
-        private Queue<GameObject> itemPoolQueue;
-
-        public Transform SpawnFromPool(Vector3 position, Quaternion rotation)
+        private static GreenBottlePool _instance;
+        public static GreenBottlePool Instance
         {
-            var objectSpawned = itemPoolQueue.Dequeue();
-            objectSpawned.SetActive(true);
-        
-            var objectSpawnedTransform = objectSpawned.transform;
-            objectSpawnedTransform.position = position;
-            objectSpawnedTransform.rotation = rotation;
-
-            itemPoolQueue.Enqueue(objectSpawned);
-            
-            return objectSpawnedTransform;
-        }
-
-        public void InitializeItemPoolDict()
-        {
-            itemPoolQueue = new Queue<GameObject>(poolSettings.PoolSize);
-            
-            InitializeItemPool(poolSettings.PoolSize, itemPoolQueue);
-        }
-   
-        private void InitializeItemPool(int poolSize, Queue<GameObject> newItemPool)
-        {
-            for (var j = 0; j < poolSize; j++)
+            get
             {
-                var obj = Instantiate(poolSettings.ItemTransform, new Vector3(0f, -100f, 0f), Quaternion.identity,
-                    gameObject.transform).gameObject;
-                obj.SetActive(false);
-                newItemPool.Enqueue(obj);
+                if (_instance != null) return _instance;
+            
+                _instance = FindObjectOfType<GreenBottlePool>();
+
+                if (_instance != null) return _instance;
+            
+                GameObject newGo = new GameObject();
+                _instance = newGo.AddComponent<GreenBottlePool>();
+                return _instance;
             }
         }
 
-        private void OnDisable()
+        protected void Awake()
         {
-            itemPoolQueue = null;
+            _instance = this as GreenBottlePool;
         }
+        
     }
 }

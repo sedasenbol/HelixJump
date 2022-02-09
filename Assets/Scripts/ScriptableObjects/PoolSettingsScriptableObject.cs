@@ -6,9 +6,9 @@ namespace ScriptableObjects
     public class PoolSettingsScriptableObject : ScriptableObject
     {
         [SerializeField] private int poolSize;
-        [SerializeField] private Transform itemTransform;
+        [SerializeField] private GameObject itemPrefab;
     
         public int PoolSize => poolSize;
-        public Transform ItemTransform => itemTransform;
+        public GameObject ItemPrefab => itemPrefab;
     }
 }

@@ -4,15 +4,20 @@ using UnityEngine;
 
 namespace Platforms
 {
-    public class PlatformGroupRotator : MonoBehaviour
+    public class PlatformGroupRotator : MonoBehaviour, IDraggable
     {
         [SerializeField] private DragSettingsScriptableObject dragSettings;
 
         private Transform myTransform;
 
-        private void OnPlayerDragged(Vector3 dragVector)
+        //TouchController.cs OnPlayerDragged event handler that rotates the platform groups.
+        public void OnPlayerDragged(Vector3 dragVector)
         {
-            myTransform.Rotate(Vector3.up, -dragVector.x * dragSettings.DragToAngleFactor);
+#if UNITY_EDITOR
+            myTransform.Rotate(Vector3.up, -dragVector.x * dragSettings.UnityEditorDragToAngleFactor);
+#else
+            myTransform.Rotate(Vector3.up, -dragVector.x * dragSettings.MobilePhoneDragToAngleFactor);
+#endif
         }
     
         private void OnEnable()

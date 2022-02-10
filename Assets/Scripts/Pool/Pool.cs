@@ -24,6 +24,7 @@ namespace Pool
             return objectSpawnedTransform;
         }
 
+        //Called by LevelManager.cs when a new level loads.
         public void InitializeItemPoolDict()
         {
             itemPoolQueue = new Queue<GameObject>(poolSettings.PoolSize);

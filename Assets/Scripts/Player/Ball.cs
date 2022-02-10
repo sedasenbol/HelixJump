@@ -50,7 +50,7 @@ namespace Player
                     return;
                 }
                 
-                LevelManager.Instance.HandleFailedLevel();
+                LevelManager.Instance.HandleUnsafePlatformHit();
 
                 isActive = false;
                 rb.Sleep();
@@ -67,7 +67,7 @@ namespace Player
                     return;
                 }
                 
-                LevelManager.Instance.HandleFailedLevel();
+                LevelManager.Instance.HandleUnsafePlatformHit();
 
                 isActive = false;
                 rb.Sleep();
@@ -89,7 +89,7 @@ namespace Player
             }
             else if (otherLayer == lastPlatformLayer)
             {
-                LevelManager.Instance.HandleCompletedLevel();
+                LevelManager.Instance.HandleLastPlatformHit();
 
                 isActive = false;
             }
@@ -97,17 +97,19 @@ namespace Player
 
         private void ShakeScale()
         {
-            myTransform.DOShakeScale(0.5f, 0.1f, 1, 90f, true);
+            myTransform.DOShakeScale(ballBounceSettings.ShakeScaleDurationOnSafePlatformHit,
+                ballBounceSettings.ShakeScaleStrengthOnSafePlatformHit, ballBounceSettings.ShakeScaleVibratoOnSafePlatformHit,
+                90f, true);
         }
 
         private void ChangeScale()
         {
-            myTransform.DOScale(ballBounceSettings.BallScaleOnUnsafePlatformHit, ballBounceSettings.BallScaleDurationOnUnsafePlatformHit)
+            myTransform.DOScale(ballBounceSettings.ScaleOnUnsafePlatformHit, ballBounceSettings.ScaleDurationOnUnsafePlatformHit)
             .SetEase(Ease.InOutSine).OnComplete(() =>
                 {
                     if (!isActive) {return;}
                     
-                    myTransform.DOScale(initialScale, ballBounceSettings.BallScaleDurationOnUnsafePlatformHit).SetEase(Ease.InOutSine);
+                    myTransform.DOScale(initialScale, ballBounceSettings.ScaleDurationOnUnsafePlatformHit).SetEase(Ease.InOutSine);
                 });
         }
 

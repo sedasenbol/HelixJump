@@ -7,26 +7,26 @@ namespace Pool
 {
     public class GreenBottlePool : Pool
     {
-        private static GreenBottlePool _instance;
+        private static GreenBottlePool instance;
         public static GreenBottlePool Instance
         {
             get
             {
-                if (_instance != null) return _instance;
+                if (instance != null) return instance;
             
-                _instance = FindObjectOfType<GreenBottlePool>();
+                instance = FindObjectOfType<GreenBottlePool>();
 
-                if (_instance != null) return _instance;
+                if (instance != null) return instance;
             
                 GameObject newGo = new GameObject();
-                _instance = newGo.AddComponent<GreenBottlePool>();
-                return _instance;
+                instance = newGo.AddComponent<GreenBottlePool>();
+                return instance;
             }
         }
 
         protected void Awake()
         {
-            _instance = this as GreenBottlePool;
+            instance = this as GreenBottlePool;
         }
         
     }

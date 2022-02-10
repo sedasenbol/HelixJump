@@ -25,7 +25,7 @@ namespace UI
         [SerializeField] private TMP_Text currentLevelText;
         [SerializeField] private TMP_Text nextLevelText;
         
-        
+        //Called by GameManager.cs when the main scene loads.
         public void Initialize(int bestScore, int currentLevelIndex)
         {
             bestScoreTMPText.text = bestScore.ToString("F0");

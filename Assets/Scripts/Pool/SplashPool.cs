@@ -7,26 +7,26 @@ namespace Pool
 {
     public class SplashPool : Pool
     {
-        private static SplashPool _instance;
+        private static SplashPool instance;
         public static SplashPool Instance
         {
             get
             {
-                if (_instance != null) return _instance;
+                if (instance != null) return instance;
             
-                _instance = FindObjectOfType<SplashPool>();
+                instance = FindObjectOfType<SplashPool>();
 
-                if (_instance != null) return _instance;
+                if (instance != null) return instance;
             
                 GameObject newGo = new GameObject();
-                _instance = newGo.AddComponent<SplashPool>();
-                return _instance;
+                instance = newGo.AddComponent<SplashPool>();
+                return instance;
             }
         }
 
         protected void Awake()
         {
-            _instance = this as SplashPool;
+            instance = this as SplashPool;
         }
     }
 }

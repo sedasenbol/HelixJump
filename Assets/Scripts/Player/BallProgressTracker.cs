@@ -6,7 +6,6 @@ using PickUps;
 using Platforms;
 using ScriptableObjects;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 namespace Player
 {
@@ -24,6 +23,7 @@ namespace Player
         private int currentPlatformGroupIndex;
         private int consecutiveBallProgressCounter;
         
+        //Called by PlatformGroupSpawner.cs after the platform groups are spawned.
         public void Initialize(List<Transform> platformGroupTransforms)
         {
             this.platformGroupTransforms = platformGroupTransforms;
@@ -33,6 +33,20 @@ namespace Player
             ballTransform = FindObjectOfType<Ball>().transform;
         }
 
+        //Called by Ball.cs on collision with the platforms. 
+        public bool IsBallOnConsecutiveProgress()
+        {
+            if (consecutiveBallProgressCounter <= 2)
+            {
+                consecutiveBallProgressCounter = 0;
+                return false;
+            }
+            
+            BreakNextPlatformGroup();
+            consecutiveBallProgressCounter = 0;
+            return true;
+        }
+        
         private void OnLevelEnd()
         {
             isGameActive = false;
@@ -64,19 +78,6 @@ namespace Player
             
             ScoreManager.Instance.IncreaseScore(consecutiveBallProgressCounter);
             OnBallProgressed?.Invoke(BallProgressPercentage);
-        }
-
-        public bool IsBallOnConsecutiveProgress()
-        {
-            if (consecutiveBallProgressCounter <= 2)
-            {
-                consecutiveBallProgressCounter = 0;
-                return false;
-            }
-            
-            BreakNextPlatformGroup();
-            consecutiveBallProgressCounter = 0;
-            return true;
         }
 
         private void OnGreenBottlePickedUp()

@@ -8,26 +8,26 @@ namespace Pool
 {
     public class BlueBottlePool : Pool
     {
-        private static BlueBottlePool _instance;
+        private static BlueBottlePool instance;
         public static BlueBottlePool Instance
         {
             get
             {
-                if (_instance != null) return _instance;
+                if (instance != null) return instance;
             
-                _instance = FindObjectOfType<BlueBottlePool>();
+                instance = FindObjectOfType<BlueBottlePool>();
 
-                if (_instance != null) return _instance;
+                if (instance != null) return instance;
             
                 GameObject newGo = new GameObject();
-                _instance = newGo.AddComponent<BlueBottlePool>();
-                return _instance;
+                instance = newGo.AddComponent<BlueBottlePool>();
+                return instance;
             }
         }
 
         protected void Awake()
         {
-            _instance = this as BlueBottlePool;
+            instance = this as BlueBottlePool;
         }
     }
 }

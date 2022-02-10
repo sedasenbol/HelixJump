@@ -5,16 +5,21 @@ using UnityEngine;
 
 namespace PickUps
 {
-    public class PickUpRotator : MonoBehaviour
+    public class PickUpRotator : MonoBehaviour, IDraggable
     {
         [SerializeField] private DragSettingsScriptableObject dragSettings;
 
         private Transform myTransform;
         private Transform cylinderTransform;
 
-        private void OnPlayerDragged(Vector3 dragVector)
+        //TouchController.cs OnPlayerDragged event handler that rotates the pick ups.
+        public void OnPlayerDragged(Vector3 dragVector)
         {
-            myTransform.RotateAround(cylinderTransform.position,Vector3.up, -dragVector.x * dragSettings.DragToAngleFactor);
+#if UNITY_EDITOR
+            myTransform.RotateAround(cylinderTransform.position,Vector3.up, -dragVector.x * dragSettings.UnityEditorDragToAngleFactor);
+#else
+            myTransform.RotateAround(cylinderTransform.position,Vector3.up, -dragVector.x * dragSettings.MobilePhoneDragToAngleFactor);
+#endif
         }
         
         private void OnCylinderSpawned(Transform cylinderTransform)

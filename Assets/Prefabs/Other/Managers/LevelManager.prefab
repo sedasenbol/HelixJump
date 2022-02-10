@@ -43,3 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15a83376b9a404dd998cc4a032491064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballBounceSettings: {fileID: 11400000, guid: cd228ab5cd1074bd783bd67b0aae11bd, type: 2}

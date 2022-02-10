@@ -2,25 +2,25 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : Component
 {
-    private static T _instance;
+    private static T instance;
     public static T Instance
     {
         get
         {
-            if (_instance != null) return _instance;
+            if (instance != null) return instance;
             
-            _instance = FindObjectOfType<T>();
+            instance = FindObjectOfType<T>();
 
-            if (_instance != null) return _instance;
+            if (instance != null) return instance;
             
             GameObject newGo = new GameObject();
-            _instance = newGo.AddComponent<T>();
-            return _instance;
+            instance = newGo.AddComponent<T>();
+            return instance;
         }
     }
 
     protected virtual void Awake()
     {
-        _instance = this as T;
+        instance = this as T;
     }
 }

@@ -7,8 +7,10 @@ namespace ScriptableObjects
     {
         [SerializeField] private float spawnProbabilityOnPlatform = 0.05f;
         [SerializeField] private float disabledPlatformDuration = 5f;
+        [SerializeField] private float disabledPlatformReappearingDuration = 4f;
         
         public float SpawnProbabilityOnPlatform => spawnProbabilityOnPlatform;
         public float DisabledPlatformDuration => disabledPlatformDuration;
+        public float DisabledPlatformReappearingDuration => disabledPlatformReappearingDuration;
     }
 }

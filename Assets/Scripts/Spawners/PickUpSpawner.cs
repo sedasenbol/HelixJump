@@ -10,6 +10,7 @@ namespace Spawners
         [SerializeField] private BlueBottleSettingsScriptableObject blueBottleSettings;
         [SerializeField] private Transform ballTransform;
         
+        //Called by PlatformGroupSpawner.cs when a new random platform is spawned.
         public void ReceivePotentialSpawnPlace(Transform platformGroup)
         {
             var randomProbability = Random.Range(0f, 1f);

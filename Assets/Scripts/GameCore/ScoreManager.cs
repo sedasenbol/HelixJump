@@ -13,7 +13,7 @@ namespace GameCore
         private int currentScore;
         private int bestScore;
 
-        //Called by GameManager.cs on start. 
+        //Called by GameManager.cs when the main scene loads.
         public void Initialize(int bestScore)
         {
             this.bestScore = bestScore;
@@ -37,7 +37,7 @@ namespace GameCore
             OnBestScoreChanged?.Invoke(bestScore);
         }
 
-        //Called by GameManager.cs when a new level is about to load.
+        //Called by GameManager.cs when the Game scene is loading.
         public void ResetCurrentScore()
         {
             currentScore = 0;

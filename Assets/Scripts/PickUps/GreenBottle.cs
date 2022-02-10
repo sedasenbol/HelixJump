@@ -10,17 +10,17 @@ namespace PickUps
 
         private int ballLayer;
 
-        private void OnEnable()
-        {
-            ballLayer = LayerMask.NameToLayer("Ball");
-        }
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.layer != ballLayer) {return;}
         
             OnGreenBottlePickedUp?.Invoke();
             gameObject.SetActive(false);
+        }
+        
+        private void OnEnable()
+        {
+            ballLayer = LayerMask.NameToLayer("Ball");
         }
     }
 }

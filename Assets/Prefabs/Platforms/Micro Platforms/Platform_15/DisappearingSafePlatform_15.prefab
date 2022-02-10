@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &363222176197844205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5776798820206763477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf2e2bb7ad54c7e9bbc3938ea8e9b8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disappearingPlatformSettings: {fileID: 11400000, guid: 22dc576c51fc14a62b8aeef0a062e0d7,
+    type: 2}
 --- !u!1 &6309139719800228178
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,18 +60,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformBreakSettings: {fileID: 11400000, guid: e037b8f21bcb94817857e45c4c87208c,
     type: 2}
---- !u!114 &363222176197844205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5776798820206763477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adf2e2bb7ad54c7e9bbc3938ea8e9b8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7309585303309921968
 PrefabInstance:
   m_ObjectHideFlags: 0
